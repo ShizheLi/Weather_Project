@@ -10,6 +10,9 @@ class Ui_Form(object):
         self.groupBox = QtWidgets.QGroupBox(Form)
         self.groupBox.setGeometry(QtCore.QRect(10, 10, 431, 251))
         self.groupBox.setObjectName('groupbox')
+        self.lineEdit = QtWidgets.QLineEdit(self.groupBox)
+
+
         self.weatherComboBox = QtWidgets.QComboBox(self.groupBox)
         self.weatherComboBox.setGeometry(QtCore.QRect(80, 30, 221, 21))
         self.weatherComboBox.setObjectName('weatherComboBox')
