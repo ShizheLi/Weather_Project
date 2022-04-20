@@ -34,12 +34,19 @@ class MainWindow(QMainWindow):
 
     def transCityName(self, cityName):
         cityCode = ''
-        if cityName == '北京':
-            cityCode = '101010100'
-        elif cityName == '天津':
-            cityCode = '101030100'
-        elif cityName == '上海':
-            cityCode = '101020100'
+        url = 'https://geoapi.qweather.com/v2/city/lookup'
+        params = {
+            'location': cityName,
+            'key': '8e54dd30c3f2413f8c5002d067b932ed'
+        }
+        response = requests.get(url=url, params=params)
+        cityCode = response.json()['location'][0]['id']
+        # if cityName == '北京':
+        #     cityCode = '101010100'
+        # elif cityName == '天津':
+        #     cityCode = '101030100'
+        # elif cityName == '上海':
+        #     cityCode = '101020100'
         
         return cityCode
 

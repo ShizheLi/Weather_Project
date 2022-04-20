@@ -8,8 +8,6 @@
 
 - `Staged`：使用`git commit`命令将修改同步到库中，文件变为`Unmodified`状态，使用`git reset HEAD filename` 命令取消暂存，文件变为`Modified`状态。
 
-
-
 > 忽略文件
 
 在主目录下建立`.gitignore`文件
@@ -21,7 +19,3 @@
 tmp/       #
 doc/*.txt  #
 ```
-
-
-
-
