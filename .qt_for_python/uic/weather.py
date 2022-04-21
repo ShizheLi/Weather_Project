@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file '/Users/lishizhe/Desktop/公选课/python与深度学习基础/Weather_Project/weather.ui'
+# Form implementation generated from reading ui file '/Users/lishizhe/Desktop/公选课/python与深度学习基础/Weather_Project/demo/weather.ui'
 #
 # Created by: PyQt6 UI code generator 6.2.3
 #
