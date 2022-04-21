@@ -5,7 +5,6 @@ from cProfile import run
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from WeatherWin import Ui_Form
-# from Ui_WeatherWin import Ui_Form
 import requests
 
 class MainWindow(QMainWindow):
@@ -15,7 +14,6 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
     def queryWeather(self):
-        print('  queryWeather  ')
         cityName = self.ui.lineEdit.text()
         cityCode = self.transCityName(cityName)
 
@@ -26,17 +24,7 @@ class MainWindow(QMainWindow):
             'key': '8e54dd30c3f2413f8c5002d067b932ed'
         }
         response = requests.get(url=url, params=params)
-        # print(response.json())
 
-        # msg0 = '更新时间: %s' % response.json()['updateTime'] + '\n'
-        # msg1 = '温度: %s' % response.json()['now']['temp'] + '度' + '\n'
-        # msg2 = '天气: %s' % response.json()['now']['text'] + '\n'
-        # msg3 = '风向: %s' % response.json()['now']['windDir'] + '\n'
-        # msg4 = '风力: %s' % response.json()['now']['windScale'] + '级' + '\n'
-        # msg5 = '湿度: %s' % response.json()['now']['humidity'] + '%' + '\n'
-        # result = msg0 + msg1 + msg2 + msg3 + msg4 + msg5
-
-        # self.ui.resultText.setText(result)
         self.ui.textEdit.setText(response.json()['now']['temp'] + ' 度')
         self.ui.textEdit_7.setText(response.json()['now']['text'])
         self.ui.textEdit_11.setText(response.json()['now']['windDir'])
@@ -51,16 +39,7 @@ class MainWindow(QMainWindow):
             'key': '8e54dd30c3f2413f8c5002d067b932ed'
         } 
         response = requests.get(url=url, params=params)
-        # print(response.json())
-
-        # msg1 = '运动指数: %s' % response.json()['daily'][0]['category'] + '， ' + response.json()['daily'][0]['text'] + '\n'
-        # msg2 = '穿衣指数: %s' % response.json()['daily'][2]['category'] + '\n'
-        # msg3 = '紫外线指数: %s' % response.json()['daily'][4]['category'] + '\n'
-        # msg4 = '感冒指数: %s' % response.json()['daily'][8]['category'] + '\n'
-        # msg5 = '防晒指数: %s' % response.json()['daily'][15]['category'] + '\n'
-        # result = msg1 + msg2 + msg3 + msg4 + msg5
-
-        # self.ui.textEdit_2.setText(result)
+        
         self.ui.textEdit_14.setText(response.json()['daily'][0]['category'] + '。' + response.json()['daily'][0]['text'])
         self.ui.textEdit_15.setText(response.json()['daily'][2]['category'] + '。' + response.json()['daily'][2]['text'])
         self.ui.textEdit_16.setText(response.json()['daily'][4]['category'] + '。' + response.json()['daily'][4]['text'])
@@ -75,13 +54,6 @@ class MainWindow(QMainWindow):
             'key': '8e54dd30c3f2413f8c5002d067b932ed'
         }
         response = requests.get(url=url, params=params)
-        # print(response.json())
-
-        # msg1 = '空气质量指数: %s' % response.json()['now']['aqi'] + '\n'
-        # msg2 = '空气质量等级: %s' % response.json()['now']['category'] + '\n'
-        # msg3 = 'PM2.5: %s' % response.json()['now']['pm2p5'] + '\n'
-        # msg4 = 'PM10: %s' % response.json()['now']['pm10'] + '\n'
-        # result = msg1 + msg2 + msg3 + msg4
 
         self.ui.textEdit_2.setText(response.json()['now']['aqi'])
         self.ui.textEdit_19.setText(response.json()['now']['category'])
@@ -97,7 +69,6 @@ class MainWindow(QMainWindow):
         }
         response = requests.get(url=url, params=params)
 
-        # print(response.json())
         self.ui.textEdit_3.setText(response.json()['daily'][0]['fxDate'])
         self.ui.textEdit_4.setText(response.json()['daily'][1]['fxDate'])
         self.ui.textEdit_5.setText(response.json()['daily'][2]['fxDate'])
@@ -129,8 +100,6 @@ class MainWindow(QMainWindow):
         return cityCode
 
     def clearResult(self):
-        print('  clearResult  ')
-        # self.ui.resultText.clear()
         self.ui.textEdit.clear()
         self.ui.textEdit_7.clear()
         self.ui.textEdit_11.clear()
