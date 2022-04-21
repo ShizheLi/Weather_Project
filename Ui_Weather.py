@@ -54,6 +54,8 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
+        self.pushButton.clicked.connect(MainWindow.queryWeather)
+        self.pushButton_2.clicked.connect(MainWindow.clearResult)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
