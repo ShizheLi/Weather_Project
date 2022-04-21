@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from cProfile import run
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtGui import QIcon
 from WeatherWin import Ui_Form
 import requests
 
@@ -135,6 +135,7 @@ class MainWindow(QMainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon("./images/amhtq-de0ai-001.ico"))
     win = MainWindow()
     win.setObjectName('MainWindow')
     win.setStyleSheet("#MainWindow{border-image:url(images/5fb4be5ead03c1605680734311.jpg);}")
