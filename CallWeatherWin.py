@@ -36,7 +36,12 @@ class MainWindow(QMainWindow):
         msg5 = '湿度: %s' % response.json()['now']['humidity'] + '%' + '\n'
         result = msg0 + msg1 + msg2 + msg3 + msg4 + msg5
 
-        self.ui.resultText.setText(result)
+        # self.ui.resultText.setText(result)
+        self.ui.textEdit.setText(response.json()['now']['temp'] + ' 度')
+        self.ui.textEdit_7.setText(response.json()['now']['text'])
+        self.ui.textEdit_11.setText(response.json()['now']['windDir'])
+        self.ui.textEdit_12.setText(response.json()['now']['windScale'] + ' 级')
+        self.ui.textEdit_13.setText(response.json()['now']['humidity'] + ' %')
 
         # 生活指数
         url = 'https://devapi.qweather.com/v7/indices/1d'
@@ -55,7 +60,13 @@ class MainWindow(QMainWindow):
         msg5 = '防晒指数: %s' % response.json()['daily'][15]['category'] + '\n'
         result = msg1 + msg2 + msg3 + msg4 + msg5
 
-        self.ui.textEdit_2.setText(result)
+        # self.ui.textEdit_2.setText(result)
+        self.ui.textEdit_14.setText(response.json()['daily'][0]['category'] + '。' + response.json()['daily'][0]['text'])
+        self.ui.textEdit_15.setText(response.json()['daily'][2]['category'] + '。' + response.json()['daily'][2]['text'])
+        self.ui.textEdit_16.setText(response.json()['daily'][4]['category'] + '。' + response.json()['daily'][4]['text'])
+        self.ui.textEdit_17.setText(response.json()['daily'][8]['category'] + '。' + response.json()['daily'][8]['text'])
+        self.ui.textEdit_18.setText(response.json()['daily'][15]['category'] + '。' + response.json()['daily'][15]['text'])
+
 
         # 空气质量
         url = 'https://devapi.qweather.com/v7/air/now'
@@ -72,7 +83,11 @@ class MainWindow(QMainWindow):
         msg4 = 'PM10: %s' % response.json()['now']['pm10'] + '\n'
         result = msg1 + msg2 + msg3 + msg4
 
-        self.ui.textEdit_3.setText(result)
+        self.ui.textEdit_2.setText(response.json()['now']['aqi'])
+        self.ui.textEdit_19.setText(response.json()['now']['category'])
+        self.ui.textEdit_20.setText(response.json()['now']['primary'])
+        self.ui.textEdit_21.setText(response.json()['now']['pm2p5'])
+        self.ui.textEdit_22.setText(response.json()['now']['pm10'])
 
         # 未来天气
         url = 'https://devapi.qweather.com/v7/weather/3d'
@@ -84,7 +99,22 @@ class MainWindow(QMainWindow):
 
         print(response.json())
         # msg = response.json()
-        self.ui.textEdit_8.setText(response.json()['daily'][0]['fxDate'])
+        # self.ui.textEdit_8.setText(response.json()['daily'][0]['fxDate'])
+        self.ui.textEdit_3.setText(response.json()['daily'][0]['fxDate'])
+        self.ui.textEdit_4.setText(response.json()['daily'][1]['fxDate'])
+        self.ui.textEdit_5.setText(response.json()['daily'][2]['fxDate'])
+        self.ui.textEdit_6.setText(response.json()['daily'][0]['tempMin'] + '到' + response.json()['daily'][0]['tempMax'] + '度')
+        self.ui.textEdit_8.setText(response.json()['daily'][1]['tempMin'] + '到' + response.json()['daily'][1]['tempMax'] + '度')
+        self.ui.textEdit_9.setText(response.json()['daily'][2]['tempMin'] + '到' + response.json()['daily'][2]['tempMax'] + '度')
+        self.ui.textEdit_25.setText(response.json()['daily'][0]['textDay'])
+        self.ui.textEdit_10.setText(response.json()['daily'][1]['textDay'])
+        self.ui.textEdit_24.setText(response.json()['daily'][2]['textDay'])
+        self.ui.textEdit_23.setText(response.json()['daily'][0]['sunrise'])
+        self.ui.textEdit_27.setText(response.json()['daily'][1]['sunrise'])
+        self.ui.textEdit_28.setText(response.json()['daily'][2]['sunrise'])
+        self.ui.textEdit_26.setText(response.json()['daily'][0]['sunset'])
+        self.ui.textEdit_29.setText(response.json()['daily'][1]['sunset'])
+        self.ui.textEdit_30.setText(response.json()['daily'][2]['sunset'])
         
 
 
@@ -103,6 +133,7 @@ class MainWindow(QMainWindow):
     def clearResult(self):
         print('  clearResult  ')
         self.ui.resultText.clear()
+        
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
