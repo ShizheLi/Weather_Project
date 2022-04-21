@@ -136,5 +136,7 @@ class MainWindow(QMainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     win = MainWindow()
+    win.setObjectName('MainWindow')
+    win.setStyleSheet("#MainWindow{border-image:url(images/5fb4be5ead03c1605680734311.jpg);}")
     win.show()
     sys.exit(app.exec_())
