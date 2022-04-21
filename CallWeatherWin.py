@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+from cProfile import run
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from WeatherWin import Ui_Form
@@ -16,16 +17,16 @@ class MainWindow(QMainWindow):
     def queryWeather(self):
         print('  queryWeather  ')
         cityName = self.ui.lineEdit.text()
-        # cityName = self.ui.weatherComboBox.currentText()
         cityCode = self.transCityName(cityName)
 
+        # 实况天气
         url = 'https://devapi.qweather.com/v7/weather/now'
         params = {
             'location': cityCode,
             'key': '8e54dd30c3f2413f8c5002d067b932ed'
         }
         response = requests.get(url=url, params=params)
-        # print(response.json())
+        print(response.json())
 
         msg0 = '更新时间: %s' % response.json()['updateTime'] + '\n'
         msg1 = '温度: %s' % response.json()['now']['temp'] + '度' + '\n'
@@ -37,6 +38,7 @@ class MainWindow(QMainWindow):
 
         self.ui.resultText.setText(result)
 
+        # 生活指数
         url = 'https://devapi.qweather.com/v7/indices/1d'
         params = {
             'location': cityCode,
@@ -44,6 +46,7 @@ class MainWindow(QMainWindow):
             'key': '8e54dd30c3f2413f8c5002d067b932ed'
         } 
         response = requests.get(url=url, params=params)
+        print(response.json())
 
         msg1 = '运动指数: %s' % response.json()['daily'][0]['category'] + '， ' + response.json()['daily'][0]['text'] + '\n'
         msg2 = '穿衣指数: %s' % response.json()['daily'][2]['category'] + '\n'
@@ -51,16 +54,17 @@ class MainWindow(QMainWindow):
         msg4 = '感冒指数: %s' % response.json()['daily'][8]['category'] + '\n'
         msg5 = '防晒指数: %s' % response.json()['daily'][15]['category'] + '\n'
         result = msg1 + msg2 + msg3 + msg4 + msg5
-        # print(response.json())
 
         self.ui.textEdit_2.setText(result)
 
+        # 空气质量
         url = 'https://devapi.qweather.com/v7/air/now'
         params = {
             'location': cityCode,
             'key': '8e54dd30c3f2413f8c5002d067b932ed'
         }
         response = requests.get(url=url, params=params)
+        print(response.json())
 
         msg1 = '空气质量指数: %s' % response.json()['now']['aqi'] + '\n'
         msg2 = '空气质量等级: %s' % response.json()['now']['category'] + '\n'
@@ -69,6 +73,20 @@ class MainWindow(QMainWindow):
         result = msg1 + msg2 + msg3 + msg4
 
         self.ui.textEdit_3.setText(result)
+
+        # 未来天气
+        url = 'https://devapi.qweather.com/v7/weather/3d'
+        params = {
+            'location': cityCode,
+            'key': '8e54dd30c3f2413f8c5002d067b932ed'
+        }
+        response = requests.get(url=url, params=params)
+
+        print(response.json())
+        # msg = response.json()
+        self.ui.textEdit_8.setText(response.json()['daily'][0]['fxDate'])
+        
+
 
     def transCityName(self, cityName):
         cityCode = ''
