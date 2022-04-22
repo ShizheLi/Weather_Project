@@ -86,7 +86,7 @@ class MainWindow(QMainWindow):
         self.ui.textEdit_30.setText(response.json()['daily'][2]['sunset'])
         
 
-
+    # 将城市名称转换为城市代码
     def transCityName(self, cityName):
         cityCode = ''
         url = 'https://geoapi.qweather.com/v2/city/lookup'
@@ -99,6 +99,7 @@ class MainWindow(QMainWindow):
         
         return cityCode
 
+    # 清除消息
     def clearResult(self):
         self.ui.textEdit.clear()
         self.ui.textEdit_7.clear()
