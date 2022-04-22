@@ -4,20 +4,27 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtGui import QIcon
-from WeatherWin import Ui_Form
 import requests
+from WeatherWin import Ui_Form  # import user-defined module
+
+
 
 class MainWindow(QMainWindow):
+    '''
+    main class
+    '''
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
+    # crawl weather info
     def queryWeather(self):
-        cityName = self.ui.lineEdit.text()
-        cityCode = self.transCityName(cityName)
+        cityName = self.ui.lineEdit.text()  # get city name
+        cityCode = self.transCityName(cityName)  # transform city name into city code
 
-        # 实况天气
+
+        # get live weather info
         url = 'https://devapi.qweather.com/v7/weather/now'
         params = {
             'location': cityCode,
@@ -31,7 +38,8 @@ class MainWindow(QMainWindow):
         self.ui.textEdit_12.setText(response.json()['now']['windScale'] + ' 级')
         self.ui.textEdit_13.setText(response.json()['now']['humidity'] + ' %')
 
-        # 生活指数
+
+        # get living index
         url = 'https://devapi.qweather.com/v7/indices/1d'
         params = {
             'location': cityCode,
@@ -47,7 +55,7 @@ class MainWindow(QMainWindow):
         self.ui.textEdit_18.setText(response.json()['daily'][15]['category'] + '。' + response.json()['daily'][15]['text'])
 
 
-        # 空气质量
+        # get air quality
         url = 'https://devapi.qweather.com/v7/air/now'
         params = {
             'location': cityCode,
@@ -61,7 +69,8 @@ class MainWindow(QMainWindow):
         self.ui.textEdit_21.setText(response.json()['now']['pm2p5'])
         self.ui.textEdit_22.setText(response.json()['now']['pm10'])
 
-        # 未来天气
+
+        # get weather forecast
         url = 'https://devapi.qweather.com/v7/weather/3d'
         params = {
             'location': cityCode,
@@ -86,7 +95,7 @@ class MainWindow(QMainWindow):
         self.ui.textEdit_30.setText(response.json()['daily'][2]['sunset'])
         
 
-    # 将城市名称转换为城市代码
+    # transform city name into city code
     def transCityName(self, cityName):
         cityCode = ''
         url = 'https://geoapi.qweather.com/v2/city/lookup'
@@ -99,7 +108,7 @@ class MainWindow(QMainWindow):
         
         return cityCode
 
-    # 清除消息
+    # clear info
     def clearResult(self):
         self.ui.textEdit.clear()
         self.ui.textEdit_7.clear()
@@ -136,9 +145,9 @@ class MainWindow(QMainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("./images/amhtq-de0ai-001.ico"))
+    app.setWindowIcon(QIcon("./images/amhtq-de0ai-001.ico"))  # set app icon
     win = MainWindow()
     win.setObjectName('MainWindow')
-    win.setStyleSheet("#MainWindow{border-image:url(images/5fb4be5ead03c1605680734311.jpg);}")
+    win.setStyleSheet("#MainWindow{border-image:url(images/5fb4be5ead03c1605680734311.jpg);}")  # set program background
     win.show()
     sys.exit(app.exec_())

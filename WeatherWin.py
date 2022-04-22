@@ -4,6 +4,9 @@
 from PyQt5 import QtCore, QtWidgets, QtGui
 
 class Ui_Form(object):
+    '''
+    This is from Qt Designer
+    '''
     def setupUi(self, Form):
         Form.setObjectName('Form')
         Form.resize(800, 600)
